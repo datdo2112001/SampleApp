@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= full_title(yield(:title)) %></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all',
+                                          'data-turbolinks-track': 'reload' %>
+
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track' => true %>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js">
+      </script>
+    <![endif]-->
+  </head>
+  <body>
+    <header class="navbar navbar-fixed-top navbar-inverse">
+      <div class="container">
+        <%= link_to "sample app", '#', id: "logo" %>
+        <nav>
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                data-toggle="collapse"
+                data-target="#bs-example-navbar-collapse-1"
+                aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+          </div>
+          <ul class="nav navbar-nav navbar-right collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <li><%= link_to "Home", root_path %></li>
+            <li><%= link_to "Help", help_path %></li>
+            <% if logged_in? %>
+              <li><%= link_to "Users", users_path %></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  Account <b class="caret"></b>
+                </a>
+               <ul class="dropdown-menu">
+                  <li><%= link_to "Profile", current_user %></li>
+                  <li><%= link_to "Settings", edit_user_path(current_user) %></li>
+                  <li class="divider"></li>
+                  <li>
+                    <%= link_to "Log out", logout_path, method: :delete %>
+                  </li>
+                </ul>
+              </li>
+            <% else %>
+              <li><%= link_to "Log in", login_path %></li>
+            <% end %>
+          </ul>
+        </nav>  
+      </div>
+    </header>
+    <div class="container">
+      <% flash.each do |message_type, message| %>
+        <div class="alert alert-<%= message_type %>"><%= message %></div>
+      <% end %>
+      <%= yield %>
+    
+    <footer class="footer">
+      <small>
+        The <a href="https://www.railstutorial.org/">Ruby on Rails Tutorial</a>
+        by <a href="https://www.michaelhartl.com/">Michael Hartl</a>
+      </small>
+      <nav>
+        <ul>
+          <li><%= link_to "About", about_path %></li>
+          <li><%= link_to "Contact", contact_path %></li>
+          <li><a href="https://news.railstutorial.org/">News</a></li>
+        </ul>
+      </nav>
+    </footer>
+     <%= debug(params) if Rails.env.development? %>
+  </div>
+  </body>
+</html>
