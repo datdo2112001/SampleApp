@@ -1,4 +1,8 @@
 class User < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :omniauthable , omniauth_providers: [:facebook, :google_oauth2]
+
 	has_many :microposts, dependent: :destroy
   	has_many :active_relationships, class_name:  "Relationship",
                                   	foreign_key: "follower_id",
@@ -93,6 +97,23 @@ class User < ApplicationRecord
   	def following?(other_user)
     	following.include?(other_user)
   	end
+
+  def self.from_omniauth(auth)
+    result = User.where(email: auth.info.email).first
+    if result
+      return result
+    else
+      where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+        user.email = auth.info.email
+        user.name = auth.info.name
+        user.password = Devise.friendly_token[0,20]
+        user.image = auth.info.image
+        user.uid = auth.uid
+        user.provider = auth.provider
+      end
+    end
+  end
+
 
 	private
 		# Converts email to all lower-case.

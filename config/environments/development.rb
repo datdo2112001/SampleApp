@@ -34,9 +34,17 @@ Rails.application.configure do
   config.active_storage.service = :local
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
-
-  config.action_mailer.perform_caching = false
+    config.action_mailer.default_url_options = {host: "https://localhost:3000"}
+    config.action_mailer.perform_deliveries = true
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+      address: "smtp.gmail.com",
+      port: 587,
+      user_name: ENV["MAIL_USERNAME"],
+      password: ENV["MAIL_PASSWORD"],
+      authentication: :plain,
+      enable_starttls_auto: true
+    }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -74,10 +82,14 @@ Rails.application.configure do
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
 
-  config.action_mailer.raise_delivery_errors = false
-  host = 'example.com' # Don't use this literally; use your local dev host instead
+ 
+   # Don't use this literally; use your local dev host instead
     # Use this on the cloud IDE.
-  config.action_mailer.default_url_options = { host: host, protocol: 'https' }
+
   # Use this if developing on localhost.
   # config.action_mailer.default_url_options = { host: host, protocol: 'http' }
+ # Allow connections to local server.
+  config.hosts.clear
+  
+
 end
