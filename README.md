@@ -1,24 +1,7 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Để app có thể hoạt động tốt ta cần thiết lập https cho localhost, ta dùng cú pháp sau:
 
-Things you may want to cover:
+$> openssl req -x509 -sha256 -nodes -newkey rsa:2048 -days 365 -keyout localhost.key -out localhost.crt
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+$> rails s -b 'ssl://localhost:3000?key=localhost.key&cert=localhost.crt'
