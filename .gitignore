@@ -72,4 +72,6 @@ yarn-debug.log*
 !/storage/.keep
 /public/uploads
 
+application.yml
+
 # End of https://www.toptal.com/developers/gitignore/api/rails
