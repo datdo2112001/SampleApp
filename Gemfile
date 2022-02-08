@@ -16,6 +16,14 @@ gem 'bootstrap-will_paginate'
 gem 'active_storage_validations'
 gem 'image_processing'
 gem 'mini_magick'
+gem 'figaro'
+
+
+gem "devise"
+gem "omniauth"
+gem "omniauth-google-oauth2"
+gem "omniauth-facebook"
+gem "omniauth-rails_csrf_protection", "~> 1.0"
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
