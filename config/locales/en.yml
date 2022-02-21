@@ -31,3 +31,14 @@
 
 en:
   hello: "Hello world"
+  header_csv_1:
+    created_at: Date
+    content: Post
+  header_csv_2:
+    created_at: Date
+    name: Name
+  header_csv_3:
+    created_at: Date
+    name: Name
+  
+

@@ -17,6 +17,8 @@ gem 'active_storage_validations'
 gem 'image_processing'
 gem 'mini_magick'
 gem 'figaro'
+gem 'csv'
+gem 'rubyzip'
 
 
 gem "devise"
